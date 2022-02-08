@@ -5,48 +5,64 @@ const bookList = document.querySelector('.books-list');
 let titleArray = [];
 let authorArray = [];
 
-function addBook()
-{
-    titleArray.push(title.value);
-    authorArray.push(author.value);
-    title.value = '';
-    authorArray.value = '';
-    bookList.innerHTML = '';
-    for(let i = (titleArray.length - 1); i < 0; i += 1)
-    {
-        bookList.innerHTML += `${bookList.innerHTML}<p>${titleArray[i]}</p>
-                               <p>${authorArray[i]}</p>
-                               <button class="remove_button-${i}">remove</button>`;
-
-        let removeButton  = document.querySelector(`.remove_button-${i}`);
-        removeButton.addEventListener('click', (event) => {
-            let Temp_Array_title = [];
-            let Temp_Array_author = [];
-            for(let j = 0; j < titleArray.length; j += 1)
-            {
-                if(j == event.currentTarget.index)
-                   continue;
-
-                Temp_Array_title.push(titleArray[j])
-                Temp_Array_author.push(authorArray[j])
-            }
-            titleArray = Temp_Array_title;
-            authorArray = Temp_Array_author;
-
-            document.querySelector(`.remove_button-${event.currentTarget.index}`).removeEventListener('click', (event) => {});
-        });
-        removeButton.index = i;
-
-    }
-
-  
+function intitializeDocument() {
+  bookList.innerHTML = '';
+  for (let i = (titleArray.length - 1); i > -1; i -= 1) {
+    bookList.innerHTML = `${bookList.innerHTML}<p>${titleArray[i]}</p>
+                            <p>${authorArray[i]}</p>
+                            <button class="remove_button_${i}">remove</button><hr/>`;
+  }
 }
 
-function removeBook()
-{
+function removeBook(index) {
+  document.querySelector(`.remove_button_${index}`).addEventListener('click', (event) => {
+    const tempArrayTitle = [];
+    const tempArrayauthor = [];
+    for (let j = 0; j < titleArray.length; j += 1) {
+      if (j !== event.currentTarget.index) {
+        tempArrayTitle.push(titleArray[j]);
+        tempArrayauthor.push(authorArray[j]);
+      }
+    }
+    titleArray = tempArrayTitle;
+    authorArray = tempArrayauthor;
+    localStorage.setItem('title', JSON.stringify(titleArray));
+    localStorage.setItem('author', JSON.stringify(authorArray));
+    intitializeDocument();
+    /* eslint-disable */
+    intitializeRemoveButtonEvents();
+   /* eslint-enable */
+  });
+  document.querySelector(`.remove_button_${index}`).index = index;
+}
 
+function intitializeRemoveButtonEvents() {
+  for (let i = (titleArray.length - 1); i > -1; i -= 1) {
+    removeBook(i);
+  }
+}
+
+function addBook() {
+  titleArray.push(title.value);
+  authorArray.push(author.value);
+  localStorage.setItem('title', JSON.stringify(titleArray));
+  localStorage.setItem('author', JSON.stringify(authorArray));
+  title.value = '';
+  author.value = '';
+  intitializeDocument();
+  intitializeRemoveButtonEvents();
 }
 
 contactForm.addEventListener('submit', (event) => {
-   addBook();
+  addBook();
+  event.preventDefault();
 });
+
+(() => {
+  if (localStorage.getItem('title') != null) {
+    titleArray = JSON.parse(localStorage.getItem('title'));
+    authorArray = JSON.parse(localStorage.getItem('author'));
+    intitializeDocument();
+    intitializeRemoveButtonEvents();
+  }
+})();
