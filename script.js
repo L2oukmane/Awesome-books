@@ -2,32 +2,27 @@ const contactForm = document.querySelector('.book_form');
 const title = document.querySelector('.book_title');
 const author = document.querySelector('.book_author');
 const bookList = document.querySelector('.books-list');
-let titleArray = [];
-let authorArray = [];
+let booksArray = [];
 
 function intitializeDocument() {
   bookList.innerHTML = '';
-  for (let i = (titleArray.length - 1); i > -1; i -= 1) {
-    bookList.innerHTML = `${bookList.innerHTML}<p>${titleArray[i]}</p>
-                            <p>${authorArray[i]}</p>
+  for (let i = (booksArray.length - 1); i > -1; i -= 1) {
+    bookList.innerHTML = `${bookList.innerHTML}<p>${booksArray[i].title}</p>
+                            <p>${booksArray[i].author}</p>
                             <button class="remove_button_${i}">remove</button><hr/>`;
   }
 }
 
 function removeBook(index) {
   document.querySelector(`.remove_button_${index}`).addEventListener('click', (event) => {
-    const tempArrayTitle = [];
-    const tempArrayauthor = [];
-    for (let j = 0; j < titleArray.length; j += 1) {
+    const tempbooksArray = [];
+    for (let j = 0; j < booksArray.length; j += 1) {
       if (j !== event.currentTarget.index) {
-        tempArrayTitle.push(titleArray[j]);
-        tempArrayauthor.push(authorArray[j]);
+        tempbooksArray.push({ title: booksArray[j].title, author: booksArray[j].author });
       }
     }
-    titleArray = tempArrayTitle;
-    authorArray = tempArrayauthor;
-    localStorage.setItem('title', JSON.stringify(titleArray));
-    localStorage.setItem('author', JSON.stringify(authorArray));
+    booksArray = tempbooksArray;
+    localStorage.setItem('books', JSON.stringify(booksArray));
     intitializeDocument();
     /* eslint-disable */
     intitializeRemoveButtonEvents();
@@ -37,16 +32,14 @@ function removeBook(index) {
 }
 
 function intitializeRemoveButtonEvents() {
-  for (let i = (titleArray.length - 1); i > -1; i -= 1) {
+  for (let i = (booksArray.length - 1); i > -1; i -= 1) {
     removeBook(i);
   }
 }
 
 function addBook() {
-  titleArray.push(title.value);
-  authorArray.push(author.value);
-  localStorage.setItem('title', JSON.stringify(titleArray));
-  localStorage.setItem('author', JSON.stringify(authorArray));
+  booksArray.push({ title: title.value, author: author.value });
+  localStorage.setItem('books', JSON.stringify(booksArray));
   title.value = '';
   author.value = '';
   intitializeDocument();
@@ -59,9 +52,8 @@ contactForm.addEventListener('submit', (event) => {
 });
 
 (() => {
-  if (localStorage.getItem('title') != null) {
-    titleArray = JSON.parse(localStorage.getItem('title'));
-    authorArray = JSON.parse(localStorage.getItem('author'));
+  if (localStorage.getItem('books') != null) {
+    booksArray = JSON.parse(localStorage.getItem('books'));
     intitializeDocument();
     intitializeRemoveButtonEvents();
   }
