@@ -4,7 +4,10 @@ class Application {
     this.title = document.querySelector('.book_title');
     this.author = document.querySelector('.book_author');
     this.bookList = document.querySelector('.parent_book_container');
+    this.dateTime = document.querySelector('.date_time');
+
     this.booksArray = [];
+    this.monthMap = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     this.contactForm.addEventListener('submit', (event) => {
       event.currentTarget.ref.addBook();
@@ -17,6 +20,11 @@ class Application {
       this.intitializeDocument();
       this.intitializeRemoveButtonEvents();
     }
+
+    window.setInterval((ref) => {
+      const currentdate = new Date();
+      ref.dateTime.innerHTML = `<p>${ref.monthMap[currentdate.getMonth()]} ${currentdate.getDate()}, ${currentdate.getFullYear()}. ${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}</p>`;
+    }, 1000, this);
   }
 
   intitializeDocument() {
