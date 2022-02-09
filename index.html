@@ -15,9 +15,9 @@
 			</a>
 			<div class="menu">
 				<ul>
-					<li><a>Book List</a><hr/></li>
-					<li><a>Add Book</a><hr/></li>
-					<li><a>Contact</a></li>
+					<li><a class="nav-link" href="#bookList">Book List</a><hr/></li>
+					<li><a class="nav-link" href="#addBook">Add Book</a><hr/></li>
+					<li><a class="nav-link" href="#contact">Contact</a></li>
 				</ul>
 			</div>
 		</div>
@@ -26,11 +26,12 @@
 		</div>
 	</header>
 	<div class="container">
-		<section class="parent_book_container">
+		<section id="bookList" class="parent_book_container">
+			<h2>`</h2>
 			<!--Dynamic Content Here-->
 		</section>
 
-		<section>
+		<section id="addBook">
 			<form  method="post" class="book_form">
 				<hr/>
 				<h2 class="form_title">Add a book</h2>
@@ -46,7 +47,7 @@
 			</form>
 		</section>
 
-		<section>
+		<section id="contact">
 	      <h1 class="contact_header">Contact Information</h1>
 		  <h2>Do you have any questions or you just want to say hello ?, you can reach out to us on</h2>
 		  <ul class="contact_info">
