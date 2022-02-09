@@ -8,25 +8,61 @@
     <title>Awesome Books</title>
 </head>
 <body>
+	<header>
+		<div class = "nav_container">
+			<a>
+				<h2>Awesome books</h2>
+			</a>
+			<div class="menu">
+				<ul>
+					<li><a>Book List</a><hr/></li>
+					<li><a>Add Book</a><hr/></li>
+					<li><a>Contact</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="date_time">
+		    <!--Dynamic Time Count-->
+		</div>
+	</header>
 	<div class="container">
-		<h1>Awesome books</h1>
 		<section class="parent_book_container">
 			<!--Dynamic Content Here-->
 		</section>
-		<form  method="post" class="book_form">
-			<hr/>
-			<h2 class="form_title">Add a book</h2>
-			<div class="form-group">
-				<label for="title"></label>
-				<input type="text" id="title" placeholder="Title" class="book_title space_bt">
-			</div>
-      <div class="form-group">
-				<label for="author"></label>
-				<input type="text" id="author" placeholder="Author" class="book_author space_bt">
-			</div>
-			<input type="submit" value="Add">
-		</form>
+
+		<section>
+			<form  method="post" class="book_form">
+				<hr/>
+				<h2 class="form_title">Add a book</h2>
+				<div class="form-group">
+					<label for="title"></label>
+					<input type="text" id="title" placeholder="Title" class="book_title space_bt">
+				</div>
+				<div class="form-group">
+					<label for="author"></label>
+					<input type="text" id="author" placeholder="Author" class="book_author space_bt">
+				</div>
+				<input type="submit" value="Add">
+			</form>
+		</section>
+
+		<section>
+	      <h1 class="contact_header">Contact Information</h1>
+		  <h2>Do you have any questions or you just want to say hello ?, you can reach out to us on</h2>
+		  <ul class="contact_info">
+			  <li><p>Our email: harlexkhal&&Loukmane@projects_partner.com</p></li>
+			  <li><p>Our phone number: +1-00000000000</p></li>
+			  <li><p>Our address: block 5, the internet is not safe to leave this here</p></li>
+		  </ul>
+		</section>
 	</div>
+	<footer>
+		<div class = "nav_container">
+			<a>
+				<h2>Copyright - Alexander & Loukmane, 2022</h2>
+			</a>
+		</div>
+	</footer>
 	<script src="script.js" ></script>
 </body>
 </html>
